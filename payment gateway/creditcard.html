@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <title>Payment Form</title>
+<head>
+  
+  <center><h2><marquee direction="left">UPI DEATILS</marquee></h2></center>
+  <style>
+    body
+            {
+            background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYewWypJQy0acPS1r4rJuDMzHhQ0TfVIE2lA&usqp=CAU);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            }
+    h2{
+      color: #4CAF50;
+    }
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+      border: 7px darkorange;
+      
+      
+      
+    }
+    
+    label {
+      font-size: larger;
+      color: blue;
+      display: block;
+      margin-bottom: 10px;
+    }
+    
+    input[type="text"], input[type="number"], input[type="date"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border-color: aqua;
+      color:darkmagenta;
+    }
+    
+    button[type="submit"] {
+      background-color: #4CAF50;
+      color: rgb(253, 14, 14);
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+    }
+    
+    #invoice {
+      background-color:aqua;
+      display: none;
+      max-width: 400px;
+      margin: 20px auto;
+      padding: 20px;
+      border: 10px solid #f30707;
+      font-family: Arial, sans-serif;
+      animation: fadeIn 5s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .button-container {  
+  display: flex;
+  justify-content: center;
+}
+.colored-label {
+  background-color: yellow; /* Adjust the color as desired */
+  padding: 5px; /* Adjust the padding as desired */
+}
+.colored-input {
+  background-color: chartreuse; /* Adjust the color as desired */
+  padding: 5px; /* Adjust the padding as desired */
+}
+
+
+  </style>
+</head>
+<body>
+  <form id="paymentForm" onsubmit="generateInvoice(event)">
+    <label for="cardNumber" class="colored-label">Credit Card Number</label>
+    <input type="text" id="cardNumber" class="colored-input"required>
+    
+    <label for="expirationDate" class="colored-label">Expiration Date</label>
+    <input type="date" id="expirationDate" class="colored-input"required>
+
+    <label for="cvv" class="colored-label">CVV Number</label>
+    <input type="text" id="cvv"class="colored-input" required>
+    
+    <label for="amount" class="colored-label">Amount</label>
+    <input type="number" id="amount" class="colored-input"required>
+
+      <label for="email" class="colored-label">Email</label>
+    <input type="email" id="email"class="colored-input" required><br><br>
+    
+    <div class="button-container"><button type="submit" >Submit</button></div>
+  </form>
+  <center><h2 id="invoice">TRANSACTION COMPLETED SUCCESSFULLY</h2></center>
+  <center><div id="invoice"></div></center>
+  <!-- <meta http-equiv="refresh" content="5;url=cardinvoice.html"> -->
+
+  <script>
+    function generateInvoice(event) {
+      event.preventDefault();
+
+      // Retrieve input values
+      const cardNumber = document.getElementById('cardNumber').value;
+      const expirationDate = document.getElementById('expirationDate').value;
+      const cvv = document.getElementById('cvv').value;
+      const amount = document.getElementById('amount').value;
+      const email = document.getElementById('email').value;
+      
+
+       // Generate a random transaction ID
+       const transactionID = generateTransactionID();
+
+
+      // Create the invoice content
+      const invoiceContent = `
+        <h2>Invoice</h2>
+        <p><strong>Credit Card Number:</strong> ${cardNumber}</p>
+        <p><strong>Expiration Date:</strong> ${expirationDate}</p>
+        <p><strong>Cvv:</strong> ${cvv}</p>
+        <p><strong>Amount:</strong> ₹${amount}</p>
+        <p><strong>Transaction ID:</strong> ${transactionID}</p>
+      `;
+
+      // Display the invoice
+      const invoiceElement = document.getElementById('invoice');
+      invoiceElement.innerHTML = invoiceContent;
+      invoiceElement.style.display = 'block';
+
+       // Send the invoice via email
+      sendEmail(email, invoiceContent);
+
+
+      // Clear the form
+      document.getElementById('paymentForm').reset();
+    }
+     function sendEmail(email, content) {
+      // Replace this code with your email sending logic
+      console.log(`Sending invoice to ${email}:\n${content}`);
+    }
+    function generateTransactionID() {
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      let transactionID = '';
+
+      for (let i = 0; i < 8; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        transactionID += characters.charAt(randomIndex);
+      }
+
+      return transactionID;
+    }
+    
+  </script>
+</body>
+</html>
