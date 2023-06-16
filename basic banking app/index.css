@@ -1,0 +1,50 @@
+.blinking {
+    animation:blinking 4s infinite;
+}
+@keyframes blinking {
+0%{                      color: blue;       }
+50%{    color:aqua;        }
+100%{  color:blueviolet;     }
+  }
+  .animation-button {
+   font-style:oblique;
+  }
+  
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th, td {
+    border: 1px solid black;
+    padding: 10px;
+  }
+  
+  th {
+    background-color: lightgray;
+  }
+  
+  tr:hover {
+    background-color: lightblue;
+  }
+  
+  .animated-table {
+    animation: table-animation 5s infinite linear;
+  }
+  
+  @keyframes table-animation {
+    0% {
+      transform: scale(1);
+    }
+  
+    50% {
+      transform: scale(1.05);
+    }
+  
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  
